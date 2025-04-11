@@ -35,6 +35,8 @@
         {% for question in questions %}
             <fieldset>
                 <legend>{{ question['question_text'] }}</legend>
+                <img src=" {{ question['src'] }}">
+                <a> Question {{ question['id'] }} / 10 </a>
                 {% for option in question['options'] %}
                     <label>
                         <input type="{{ question['type'] }}" name="{{ question['id'] }}" value="{{ option }}">
