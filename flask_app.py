@@ -115,11 +115,11 @@ def quiz():
 @app.route('/quiz', methods=['POST'])
 def quiz_post():
     user_answers = {key: value for key, value in request.form.items()}
+    print(user_answers)
     user_name = request.form['username']
     score, total_questions = calculate_score(user_answers)
     score_db.new_score(user_name, score)
     all_scores = score_db.get_scores()[::-1]
-    print(all_scores)
     return render_template('result.html', title='Quiz Result', score=score, total_questions=total_questions,
                            score_ratings=all_scores)
 

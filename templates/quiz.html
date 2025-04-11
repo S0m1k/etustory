@@ -39,10 +39,29 @@
                 <a> Question {{ question['id'] }} / 10 </a>
                 {% for option in question['options'] %}
                     <label>
-                        <input type="{{ question['type'] }}" name="{{ question['id'] }}" value="{{ option }}">
+                        <input type="{{ question['type'] }}" name="{{ question['correct_answer'] }}" value="{{ option }}">
                         {{ option }}
                     </label><br>
                 {% endfor %}
+                <button id="{{ question['correct_answer'] }}" type="button" onclick="checkAnswer()">Check answer</button>
+                <div id="ans{{ question['correct_answer'] }}"></div>
+                <script>
+                    function checkAnswer(){
+                        var ele = document.getElementsByName(event.target.id);
+                        for (i = 0; i < ele.length; i++) {
+                            if (ele[i].checked){
+                                if(ele[i].value == ele[i].name){
+                                    document.getElementById('ans' + event.target.id).innerHTML = "Верно";
+                                }
+                                else{
+                                    document.getElementById('ans' + event.target.id).innerHTML = "Неверно";
+                                }
+                            }
+                        }
+                    }
+                </script>
+
+
             </fieldset>
         {% endfor %}
         <a>Введите свой юзернейм</a>
