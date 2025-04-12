@@ -98,10 +98,9 @@ quiz_data = {
 def index():
     return render_template("index.html")
 
-
-@app.route('/articles')
-def articles():
-    return render_template("article.html")
+@app.route('/article/<string:slug>')
+def article(slug):
+    return render_template(f"article/{slug}.html")
 
 @app.route('/authors')
 def authors():
