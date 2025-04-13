@@ -1,0 +1,9 @@
+{% extends 'sample.html' %}
+
+{% block main %}
+<div>
+  <img src=" {{ image }}">
+  <label> {{ text }}</label>
+  <a href="{{ url_for('question', id = new_id) }}">Следующий вопрос</a>
+</div>
+{% endblock %}

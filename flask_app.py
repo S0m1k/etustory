@@ -1,17 +1,19 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session
+from random import sample
 from db import Score_DB
 import os
 
 
 app = Flask(__name__)
-score_db = Score_DB('C:\\Users\\Admin\\PycharmProjects\\Flask_App\\static\\score.db')
+score_db = Score_DB('C:\\Users\\Admin\\PycharmProjects\\etustory\\static\\score.db')
+app.secret_key = 'BAD_SECRET_KEY'
 
 quiz_data = {
     'title': 'Тест 139 лет ЛЭТИ',
     'questions': [
         {
             'type': 'radio',
-            'id': 1,
+            'id': 0,
             'src': 'path',
             'question_text': 'Кто подписал указ о преобразовании технического училища в электротехничекий институт',
             'options': ['Александр II', 'Александр III', 'Николай II', 'А. С. Колпаков'],
@@ -19,7 +21,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 2,
+            'id': 1,
             'src': 'path',
             'question_text': 'Кто основал первую в России кафедру теоретических основ электротехники в ЭТИ',
             'options': ['А. С. Попов', 'Г. О. Графтио', 'Н. А. Быков', 'И. И. Боргман'],
@@ -27,7 +29,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 3,
+            'id': 2,
             'src': 'path',
             'question_text': 'С каким докладом выступил А. С. Попов перед преподатвателями и студентами ЭТИ в 1897 году?',
             'options': ['Об электрической тяге', 'О технике высоких напряжений', 'О беспроволочной телеграфии', 'О технике малых напряжений'],
@@ -35,7 +37,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 4,
+            'id': 3,
             'src': 'path',
             'question_text': 'В каком году электротехничекий институт получил статусвысшего учебного заведения с введением пятикурсного обучения?',
             'options': ['1899', '1897', '1891', '1488'],
@@ -43,7 +45,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 5,
+            'id': 4,
             'src': 'path',
             'question_text': 'Какое звание присваивалось выпускникам ЭТИ начиная с 1900 года?',
             'options': ['Инжинер-механик', 'Инжинер-электрик', 'Инжинер-строитель', 'Электротехник'],
@@ -51,7 +53,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 6,
+            'id': 5,
             'src': 'path',
             'question_text': 'Кто был избран директором ЭТИ в 1905 году?',
             'options': ['А. С. Попов', 'Г. О. Графтио', 'Н. А. Быков', 'Г. О. Осадчий'],
@@ -59,7 +61,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 7,
+            'id': 6,
             'src': 'path',
             'question_text': 'В каком году электротехнический институт императора Александра III был переименован в Электротехнический институт имени В. И. Ульянова?',
             'options': ['1917', '1918', '1924', '1930'],
@@ -67,7 +69,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 8,
+            'id': 7,
             'src': 'path',
             'question_text': 'В каком году ЛЭТИ наградиил орденом Ленина за большие заслуги в подготовке инжинерных кадров?',
             'options': ['1945', '1957', '1967', '1986'],
@@ -75,7 +77,7 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 9,
+            'id': 8,
             'src': 'path',
             'question_text': "В каком году ЛЭТИ получил статус технического университета и новое название - 'Санкт-Петербургский государственный электротехнический университет имени В. И. Ульянова'",
             'options': ['1989', '1990', '1991', '1992'],
@@ -83,14 +85,13 @@ quiz_data = {
         },
         {
             'type': 'radio',
-            'id': 10,
+            'id': 9,
             'src': 'path',
             'question_text': 'В каком году выпускник ЛЭТИ Жорес Алферов получил нобелевскую премию по физике?',
             'options': ['1994', '1996', '1998', '2000'],
             'correct_answer': '2000'
         },
     ]
-
 }
 
 @app.route('/')
@@ -109,31 +110,50 @@ def authors():
 
 @app.route('/quiz')
 def quiz():
-    return render_template("quiz.html", title=quiz_data['title'], quiz_title=quiz_data['title'],
-                           questions=quiz_data['questions'])
+    return render_template("quiz-start.html")
+
+@app.route('/quiz/<int:id>')
+def question(id):
+    ans = quiz_data['questions'][id]
+    ans['options'] = sample(ans['options'], k=len(ans['options']))
+    return render_template('question.html', question=ans)
+
+@app.route('/quiz/results')
+def results():
+    score_db.new_score(session['username'], session['score'])
+    all_scores = score_db.get_scores()[::-1]
+    return render_template('result.html', title='Quiz Result', score=session['score'],
+                           total_questions=len(quiz_data['questions']),
+                           score_ratings=all_scores)
+
+
+@app.route('/quiz/<int:id>', methods=['POST', 'GET'])
+def question_processing(id):
+    ans = quiz_data['questions'][id]
+    try:
+        user_answers = [value for key, value in request.form.items()][0]
+        if check_answer(user_answers, ans['correct_answer']):
+            session['score'] += 1
+            if id != 9:
+                return render_template('answer.html', image=ans['src'], new_id=ans['id'] + 1, text="Верно")
+            return render_template('answer_toresult.html', image=ans['src'], text="Верно")
+        if id != 9:
+            return render_template('answer.html', image=ans['src'], new_id=ans['id'] + 1, text="Неверно")
+        return render_template('answer_toresult.html', image=ans['src'], text="Неверно")
+    except Exception:
+        return redirect( url_for('question', id=id))
+
+
+def check_answer(client_answer, right_answer):
+    if client_answer == right_answer:
+        return True
+    return False
 
 @app.route('/quiz', methods=['POST'])
 def quiz_post():
-    user_answers = {key: value for key, value in request.form.items()}
-    print(user_answers)
-    user_name = request.form['username']
-    score, total_questions = calculate_score(user_answers)
-    score_db.new_score(user_name, score)
-    all_scores = score_db.get_scores()[::-1]
-    return render_template('result.html', title='Quiz Result', score=score, total_questions=total_questions,
-                           score_ratings=all_scores)
-
-def calculate_score(user_answers):
-    score = 0
-    total_questions = len(quiz_data['questions'])
-
-    for question in quiz_data['questions']:
-        question_id = question['id']
-        user_answer = user_answers.get(str(question_id))
-        if user_answer and user_answer == question['correct_answer']:
-            score += 1
-
-    return score, total_questions
+    session['username'] = request.form['username']
+    session['score'] = 0
+    return redirect(url_for('question', id = 0))
 
 if __name__ == '__main__':
     app.run(debug=True)

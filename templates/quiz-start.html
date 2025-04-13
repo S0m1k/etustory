@@ -1,0 +1,8 @@
+{% extends 'sample.html' %}
+
+{% block main %}
+    <form method="POST" action="{{ url_for('quiz') }}">
+        <input type="text" name="username">
+        <button type="submit">Начать квиз</button>
+    </form>
+{% endblock %}

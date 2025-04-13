@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+  </head>
+  <body>
+    <header>
+      <div class="header-top">
+	<img src="/static/spbetu-logo-ru-svg1.svg" onclick="openPage('/home')" />
+	<div class="title">139 Лет первого электротехнического на одной платформе</div>
+      </div>
+      <div class="header-bottom">
+	<div onclick="openPage('/articles')">Статьи</div>
+	<div>Таймлайн</div>
+	<div onclick="openPage('/authors')">Авторам</div>
+	<div>Жизнь музея</div>
+	<div onclick="openPage('/quiz')">Тесты и викторины</div>
+	<script>
+		function openPage(page) {
+  			window.location.href=page
+		}
+	</script>
+      </div>
+    </header>
+	{% block main %}
+	{% endblock %}
+    <footer>
+      <div class="col1">
+	<img src="/static/spbetu-logo-ru-svg2.svg" />
+	<div class="underlogo">
+	  <h3>Проект команды</h3>
+	  <div>“Катюха” FanClub</div>
+	  <br>
+	  <h3>В составе:</h3>
+	  <div>
+	    Сомов Андрей, 4395 <br>
+	    Власов Иван, 4372 <br>
+	    Алтухов Дмитрий, 4395 <br>
+	    Харчинский Савелий, 4734
+	  </div>
+	</div>
+      </div>
+      <div class="col2">
+	<h3>Пользователям</h3>
+	<div>
+	  <div>Статьи</div>
+	  <div>Таймлайн</div>
+	  <div>Викторины и тесты</div>
+	  <div>Авторам</div>
+	</div>
+      </div>
+      <div class="col3">
+	<a href="https://t.me/etustory"><img src="/static/frame-40.svg" /></a>
+	<div class="underlogo">
+	  <div>Поддержать проект</div>
+	  <div>Обратная связь</div>
+	</div>
+      </div>
+    </footer>
+  </body>
+</html>
