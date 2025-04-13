@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="cosmetic update">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/1917.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/fkti.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/museum.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/popov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/vov.html" afterDir="false" />
+    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="update scrolls + static involve 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/frame-40.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/frame-40.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/leftarrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/leftarrow.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/rightarrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/rightarrow.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/score.db" beforeDir="false" afterPath="$PROJECT_DIR$/static/score.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/spbetu-logo-ru-svg1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/spbetu-logo-ru-svg1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/spbetu-logo-ru-svg2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/spbetu-logo-ru-svg2.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/union0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/union0.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/article.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/authors.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authors.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sample.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sample.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +123,21 @@
       <option name="project" value="LOCAL" />
       <updated>1744510848810</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update scrolls + static involve">
+      <created>1744578758551</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744578758551</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update scrolls + static involve 2">
+      <created>1744578782993</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744578782993</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +159,8 @@
     <MESSAGE value="new quiz 3" />
     <MESSAGE value="full quiz update" />
     <MESSAGE value="cosmetic update" />
-    <option name="LAST_COMMIT_MESSAGE" value="cosmetic update" />
+    <MESSAGE value="update scrolls + static involve" />
+    <MESSAGE value="update scrolls + static involve 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update scrolls + static involve 2" />
   </component>
 </project>
