@@ -1,572 +1,536 @@
 <!doctype html>
 <html>
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <style>
-    .article-anchor {
-      display: block;
-      position: relative;
-      top: -100px;
-      /*  height of header */
-      visibility: hidden;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <div class="header-top">
-      <img src="/static/spbetu-logo-ru-svg1.svg" onclick="openPage('/home')" />
-      <div class="title">139 Лет первого электротехнического на одной платформе</div>
-    </div>
-    <div class="header-bottom">
-      <div onclick="goToSection('articles')">Статьи</div>
-      <div onclick="goToSection('timeline')">Таймлайн</div>
-      <div onclick="openPage('/authors')">Авторам</div>
-      <div>Жизнь музея</div>
-      <div onclick="openPage('/quiz')">Тесты и викторины</div>
-      <script>
-        function openPage(page) {
-          window.location.href = page
-        }
-
-        function goToSection(section) {
-          const currentPath = window.location.pathname;
-
-          // Если мы уже на главной странице, просто прокручиваем к нужному блоку
-          if (currentPath === '/' || currentPath === '/home') {
-            scrollToSection(section);
-          } else {
-            // Иначе, переходим на главную страницу и прокручиваем
-            window.location.href = '/home#' + section;
-          }
-        }
-
-        function scrollToSection(section) {
-          let element;
-          if (section === 'articles') {
-            element = document.querySelector('.title'); // Блок <div class="title">ФКТИ</div>
-          } else if (section === 'timeline') {
-            element = document.querySelector('h2'); // Блок <h2> История университета на таймлайне</h2>
-          }
-
-          if (element) {
-            element.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-
-        // Проверяем, есть ли якорь в URL при загрузке страницы
-        window.onload = function () {
-          if (window.location.hash) {
-            const section = window.location.hash.substring(1); // Удаляем '#'
-            scrollToSection(section);
-          }
-        };
-      </script>
-    </div>
-  </header>
-  <main>
-    <div class="splash index-splash">
-      <div class="splash-content">
-        <span>ЛЭТИ</span>
-        <span class="year">1886-2025</span>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="header-top">
+	<img src="/static/spbetu-logo-ru-svg1.svg" onclick="openPage('/home')" />
+	<div class="title">139 Лет первого электротехнического на одной платформе</div>
       </div>
-      <img class="bg" src="/static/image-20.png" />
-    </div>
-    <div class="new">
-      <div class="bg">
-        <div class="eclipse"></div>
-        <div class="planet"></div>
-        <div class="planet2"></div>
-        <img class="texture" src="/static/texture0.png" />
-      </div>
-      <div class="linklist">
-        <h2>Новое на платформе</h2>
-        <div class="list">
-          <div class="link">
-            <img src="/static/image-30.png" />
-            <div class="type">Статья</div>
-            <div class="title">ФКТИ</div>
-            <div class="subtitle">
-              От Электрификации судов до информационной безопасности
-            </div>
-            <div class="date">20.02.2025</div>
-            <div onclick="openPage('/article/fkti')" class="readbutton">Читать</div>
-          </div>
+      <div class="header-bottom">
+	<div onclick="smoothScroll(document.getElementsByClassName('linklist')[0])" >Статьи</div>
+	<div onclick="smoothScroll(document.getElementsByClassName('timeline')[0])" >Таймлайн</div>
+	<div onclick="openPage('/authors')">Авторам</div>
+	<div onclick="openPage('/quiz')">Тесты и викторины</div>
+	<script>
+		function openPage(page) {
+  			window.location.href=page
+		}
+		window.smoothScroll = function(target) {
+		var scrollContainer = target;
+		do { //find scroll container
+			scrollContainer = scrollContainer.parentNode;
+			if (!scrollContainer) return;
+			scrollContainer.scrollTop += 1;
+		} while (scrollContainer.scrollTop == 0);
 
-          <div class="link">
-            <img src="/static/image-40.png" />
-            <div class="type">Статья</div>
-            <div class="title">А.С. Попов</div>
-            <div class="subtitle">
-              Отец Российской радиотехники
-            </div>
-            <div class="date">20.02.2025</div>
-            <div onclick="openPage('/article/popov')" class="readbutton">Читать</div>
-          </div>
+		var targetY = 0;
+		do { //find the top of target relatively to the container
+			if (target == scrollContainer) break;
+			targetY += target.offsetTop;
+		} while (target = target.offsetParent);
 
-          <div class="link">
-            <img src="/static/image-50.png" />
-            <div class="type">Статья</div>
-            <div class="title">ЛЭТИ</div>
-            <div class="subtitle">
-              в годы Великой Отечественной Войны
-            </div>
-            <div class="date">14.02.2025</div>
-            <div onclick="openPage('/article/vov')" class="readbutton">Читать</div>
-          </div>
+		scroll = function(c, a, b, i) {
+			i++; if (i > 30) return;
+			c.scrollTop = a + (b - a) / 30 * i;
+			setTimeout(function(){ scroll(c, a, b, i); }, 20);
+		}
+		scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+	}
+	</script>
+      </div>
+    </header>
+    <main>
+      <div class="splash index-splash">
+	<div class="splash-content">
+	  <span>ЛЭТИ</span>
+	  <span class="year">1886-2025</span>
+	</div>
+	<img class="bg" src="/static/image-20.png" />
+      </div>
+      <div class="new">
+	<div class="bg">
+	  <div class="eclipse"></div>
+	  <div class="planet"></div>
+	  <div class="planet2"></div>
+	  <img class="texture" src="/static/texture0.png" />
+	</div>
+	<div class="linklist">
+	  <h2>Новое на платформе</h2>
+	  <div class="list">
+	    <div class="link">
+	      <img src="/static/image-30.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">ФКТИ</div>
+	      <div class="subtitle">
+		От Электрификации судов до информационной безопасности
+	      </div>
+	      <div class="date">20.02.2025</div>
+	      <div onclick="openPage('/article/fkti')" class="readbutton">Читать</div>
+	    </div>
 
-          <div class="link">
-            <img src="/static/image-60.png" />
-            <div class="type">Статья</div>
-            <div class="title">История Музея</div>
-         <div class="subtitle">
-              С 1986 по сегодняшний день
-            </div>
-            <div class="date">10.02.2025</div>
-            <div onclick="openPage('/article/museum')" class="readbutton">Читать</div>
-          </div>
+	    <div class="link">
+	      <img src="/static/image-40.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">А.С. Попов</div>
+	      <div class="subtitle">
+		Отец Российской радиотехники
+	      </div>
+	      <div class="date">20.02.2025</div>
+	      <div onclick="openPage('/article/popov')" class="readbutton">Читать</div>
+	    </div>
 
-          <div class="link">
-            <img src="/static/image-22.png" />
-            <div class="type">Статья</div>
-            <div class="title">Электротехнический</div>
-            <div class="subtitle">
-              В период с 1917 по 1930
-            </div>
-            <div class="date">20.02.2025</div>
-            <div onclick="openPage('/article/1917')" class="readbutton">Читать</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="timeline">
-      <h2> История университета на таймлайне</h2>
-      <img class="line" src="/static/union0.svg" />
-      <div class="popovers">
-        <div id="popover1886" popover class="datecard">
-          <h3>1886 год</h3>
-          <img class="cardimg" src="/static/imagefill0.png" />
-          <div class="cardcaption">
-            15 (3) июня 1886: Император Александр III утвердил создание Технического
-            училища Почтово-телеграфного ведомства, положив начало первому в России
-            специализированному электротехническому учебному заведению. Это событие
-            стало отправной точкой для развития электротехнического образования в
-            стране.
-          </div>
-        </div>
-        <div id="popover1891" popover class="datecard">
-          <h
-3>1891 год</h3>
-          <img class="cardimg" src="/static/imagefill1.png" />
-          <div class="cardcaption">
-            11 (23) июня 1891: Преобразование Технического училища в
-            Электротехнический институт (ЭТИ), что повысило статус учебного
-            заведения и расширило учебные программы. Институт стал центром
-            подготовки инженеров-электриков высокого уровня.
-          </div>
-        </div>
-        <div id="popover1893" popover class="datecard">
-          <h3>1893 год</h3>
-          <img class="cardimg" src="/static/imagefill2.png" />
-          <div class="cardcaption">
-            1893: Основание первой в России кафедры теоретических основ
-            электротехники профессором И.И. Боргманом. Это заложило фундамент для
-            развития теоретической базы электротехнического образования в стране.
-          </div>
-        </div>
-        <div id="popover1897" popover class="datecard">
-          <h3>1897 год</h3>
-          <img class="cardimg" src="/static/imagefill3.png" />
-          <div class="cardcaption">
-            31 (19) октября 1897: Доклад А.С. Попова «О беспроволочной телеграфии».
-            Это событие стало одним из первых публичных представлений изобретения
-            радио и укрепило позиции ЭТИ как передового научного центра.
-          </div>
-        </div>
-        <div id="popover1899" popover class="datecard">
-          <h3>1899 год</h3>
-          <img class="cardimg" src="/static/imagefill4.png" />
-          <div class="cardcaption">
-            16 (4) июня 1899: Электротехнический институт императора Александра III
-            получил статус высшего учебного заведения с введением пятикурсного
-            обучения. Это позволило углубить учебную программу и повысить
-            квалификацию выпускников.
-          </div>
-        </div>
-        <div id="popover1900" popover class="datecard">
-          <h3>1900 год</h3>
-          <img class="cardimg" src="/static/imagefill5.png" />
-          <div class="cardcaption">
-            16 (4) июня 1899: Электротехнический институт императора Александра III
-            получил статус высшего учебного заведения с введением пятикурсного
-            обучения. Это позволило углубить учебную программу и повысить
-            квалификацию выпускников.
-          </div>
-        </div>
-        <div id="popover1905" popover class="datecard">
-          <h3>1905 год</h3>
-          <img class="cardimg" src="/static/imagefill6.png" />
-          <div class="cardcaption">
-            7 октября (25 сентября) 1905: Совет ЭТИ избрал директором профессора
-            А.С. Попова. Это событие стало признанием заслуг Попова и важным этапом
-            в развитии института, возглавляемого выдающимся ученым.
-          </div>
-        </div>
-        <div id="popover1916" popover class="datecard">
-          <h3>1916 год</h3>
-          <img class="cardimg" src="/static/imagefill7.png" />
-          <div class="cardcaption">
-            1916: Совет института принял решение допустить прием в институт лиц
-            женского пола. Это стало важным шагом на пути к равноправию в
-            образовании и расширению доступа к инженерным профессиям.
-          </div>
-        </div>
-        <div id="popover1918" popover class="datecard">
-          <h3>1918 год</h3>
-          <img class="cardimg" src="/static/imagefill8.png" />
-          <div class="cardcaption">
-            1918: Электротехнический институт императора Александра III переименован
-            в Электротехнический институт имени В.И. Ульянова (Ленина). Это событие
-            отразило изменения в политической системе страны и идеологическую
-            направленность образования.
-          </div>
-        </div>
-        <div id="popover1931" popover class="datecard">
-          <h3>1931 год</h3>
-          <img class="cardimg" src="/static/imagefill9.png" />
-          <div class="cardcaption">
-	    1931: Создана кафедра «Приборы управления стрельбой» (ПУС). Это событие
-            положило начало подготовке специалистов в области вычислительной
-            техники, что в будущем станет одним из ключевых направлений развития
-            института
-          </div>
-        </div>
-        <div id="popover1937" popover class="datecard">
-          <h3>1937 год</h3>
-          <img class="cardimg" src="/static/imagefill10.png" />
-          <div class="cardcaption">
-            1937: Образец звукового дефектоскопа, созданный в ЛЭТИ, был принят и
-            запущен в промышленное производство. Это событие стало важным этапом в
-            развитии ультразвуковой дефектоскопии и внедрении научных разработок
-            института в промышленность.
-          </div>
-        </div>
-        <div id="popover1941" popover class="datecard">
-          <h3>1941 год</h3>
-          <img class="cardimg" src="/static/imagefill11.png" />
-          <div class="cardcaption">
-            Началась блокада Ленинграда. Студенты и преподаватели ЛЭТИ ушли на
-            фронт. Во время блокады институт продолжал работать, выпуская
-            специалистов для нужд города и фронта.
-          </div>
-        </div>
-        <div id="popover1942" popover class="datecard">
-          <h3>1942 год</h3>
-          <img class="cardimg" src="/static/imagefill12.png" />
-          <div class="cardcaption">
-            13 марта 1942: Эвакуация ЛЭТИ из блокадного Ленинграда. Это позволило
-            сохранить научный и образовательный потенциал института в тяжелейших
-            условиях войны.
-          </div>
-        </div>
-        <div id="popover1945" popover class="datecard">
-          <h3>1945 год</h3>
-          <img class="cardimg" src="/static/imagefill13.png" />
-          <div class="cardcaption">
-            Март 1945: Возвращение ЛЭТИ из эвакуации в Ленинград. Начало
-            восстановления учебной и лабораторной базы института послевоенные годы.
-          </div>
-        </div>
-        <div id="popover1947" popover class="datecard">
-          <h3>1947 год</h3>
-          <img class="cardimg" src="/static/imagefill14.png" />
-          <div class="cardcaption">
-            1947: На фасаде первого корпуса была открыта мемориальная доска
-            профессору, изобретателю радио, первому выборному директору института
-            А.С. Попову. Это увековечило память о выдающемся ученом и его вкладе в
-            развитие науки и техники.
-          </div>
-        </div>
-        <div id="popover1952" popover class="datecard">
-          <h3>1952 год</h3>
-          <img class="cardimg" src="/static/imagefill15.png" />
-          <div class="cardcaption">
+	    <div class="link">
+	      <img src="/static/image-50.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">ЛЭТИ</div>
+	      <div class="subtitle">
+		в годы Великой Отечественной Войны
+	      </div>
+	      <div class="date">14.02.2025</div>
+	      <div onclick="openPage('/article/vov')" class="readbutton">Читать</div>
+	    </div>
 
-            5 декабря 1957: Спущен на воду атомоход «Ленин», в создании которого
-            принимали участие ученые ЛЭТИ. Это событие стало важным этапом в
-            развитии атомной энергетики и продемонстрировало высокий уровень
-            научно-технической экспертизы института.
-          </div>
-        </div>
-        <div id="popover1962" popover class="datecard">
-          <h3>1962 год</h3>
-          <img class="cardimg" src="/static/imagefill16.png" />
-          <div class="cardcaption">
-            1962: Организована первая в стране кафедра электронной медицинской
-            аппаратуры. Началась подготовка специалистов в области биомедицинской
-            электроники, что стало новым направлением в развитии института.
-          </div>
-        </div>
-        <div id="popover1967" popover class="datecard">
-          <h3>1967 год</h3>
-          <img class="cardimg" src="/static/imagefill17.png" />
-          <div class="cardcaption">
-            7 января 1967: ЛЭТИ награжден орденом Ленина за заслуги в подготовке
-            инженерных кадров и развитии научных исследований. Это стало высшей
-            государственной наградой, признанием достижений института.
-          </div>
-        \
-</div>
-        <div id="popover1986" popover class="datecard">
-          <h3>1986 год</h3>
-          <img class="cardimg" src="/static/imagefill18.png" />
-          <div class="cardcaption">
-            1986: На Инструментальной улице около здания пятого корпуса установлен
-            Памятник студентам и преподавателям ЛЭТИ, погибшим в годы войны. Это
-            дань памяти героям, отдавших свои жизни за Родину. В этом же году был
-            открыт музей истории ЛЭТИ
-          </div>
-        </div>
-        <div id="popover1992" popover class="datecard">
-          <h3>1992 год</h3>
-          <img class="cardimg" src="/static/imagefill19.png" />
-          <div class="cardcaption">
-            1992: ЛЭТИ получил статус технического университета и новое название –
-            «Санкт-Петербургский государственный электротехнический университет
-            имени В.И. Ульянова (Ленина)» (СПбГЭТУ). Это событие стало важным этапом
-            в развитии института, открыв новые возможности для расширения
-            образовательной и научной деятельности.
-          </div>
-        </div>
-        <div id="popover2000" popover class="datecard">
-          <h3>2000 год</h3>
-          <img class="cardimg" src="/static/imagefill20.png" />
-          <div class="cardcaption">
-            2000: Присуждение Нобелевской премии по физике выпускнику ЛЭТИ академику
-            Жоресу Ивановичу Алферову. Это событие стало признанием выдающихся
-            научных достижений выпускника ЛЭТИ и повысило престиж университета.
-          </div>
-        </div>
-        <div id="popover2005" popover class="datecard">
-          <h3>2005 год</h3>
-          <img class="cardimg" src="/static/imagefill21.png" />
-          <div class="cardcaption">
-            2005: Открытие у входа в мемориальный музей-лабораторию А.С. Попова
-            бронзовой мемориальной доски IEEE Milestone, посвященной 110-летию
-            изобретения радио А.С. Поповым. Это подтверждает международное признание
-            вклада А.С. Попова и ЛЭТИ в развитие электротехники.
-          </div>
-        </div>
-        <div id="popover2013" popover class="datecard">
-          <h3>2013 год</h3>
-          <img class="cardimg" src="/static/imagefill22.png" />
-          <div class="cardcaption">
-            Август 2013: СПбГЭТУ «ЛЭТИ» вошел в число вузов-победителей конкурса на
-            право получения государственных субсидий для повышения
-            конкурентоспособности и продвижения в международных рейтингах. Это стало
-            стимулом для развития института и повышения его конкурентоспособности на
-            международном уровне.
-          </div>
-        </div>
-        <div id="popover2014" popover class="datecard">
-          <h3>2014 год</h3>
-          <img class="cardimg" src="/static/imagefill23.png" />
-          <div class="cardcaption">
-            21 октября 2014: СПбГЭТУ «ЛЭТИ» награжден Орденом Дружбы
-            Социалистической Республики Вьетнам. Это признание многолетнего вклада
-            ЛЭТИ в подготовку кадров для Вьетнама и развитие сотрудничества между
-            странами.
-          </div>
-        </div>
-      </div>
-      <script>
-        const datecards = document.querySelectorAll("div.popovers > .datecard");
-        datecards.forEach((datecard) => {
-          let nextCard = datecard.nextElementSibling;
-          let prevCard = datecard.previousElementSibling;
-          let header = datecard.querySelector("h3");
-          header.insertAdjacentHTML("afterbegin", `<img class="prev" src="/static/leftarrow.svg" />`);
-          header.insertAdjacentHTML("beforeend", `<img class="next" src="/static/rightarrow.svg" />`);
-          let prevButton = header.querySelector("img.prev");
-          let nextButton = header.querySelector("img.next");
-          if (prevCard !== null) {
-            prevButton.addEventListener("click", () => {
-              datecard.hidePopover();
-              prevCard.showPopover();
-            });
-          } else {
-            prevButton.classList.add("disabled")
-          }
-          if (nextCard !== null) {
-            nextButton.addEventListener("click", () => {
-              datecard.hidePopover();
-              nextCard.showPopover();
-            });
-          } else {
-            nextButton.classList.add("disabled")
-          }
-        });
-      </script>
-      <div class="dates">
-        <button class="date" popovertarget="popover1886">
-          <span class="year">1886</span>
-          <span class="caption">Утверждение создания Почтово-Телеграфного ведомства</span>
-        </button>
-        <button class="date" popovertarget="popover1891">
-          <span class="year">1891</span>
-          <span class="caption">Присвоение статуса Электротехнического института</span>
-        </button>
-        <button class="date" popovertarget="popover1893">
-          <span class="year">1893</span>
-          <span class="caption">Основание кафедры основ Электротехники</span>
-        </button>
-        <button class="date" popovertarget="popover1897">
-          <span class="year">1897</span>
-          <span class="caption">Доклад Попова "О беспроволочной телеграфии"</span>
-        </button>
-        <button class="date" popovertarget="popover1899">
-          <span class="year">1899</span>
-          <span class="caption">Получение статуса Высшего учебного заведения</span>
-        </button>
-        <button class="date" popovertarget="popover1900">
-          <span class="year">1900</span>
-          <span class="caption">Присвоение выпускникам звания "инженер-электрик"</span>
-        </button>
-        <button class="date" popovertarget="popover1905">
-          <span class="year">1905</span>
-          <span class="caption">Избрание Попова директором ЭТИ</span>
-        </button>
-        <button class="date" popovertarget="popover1916">
-          <span class="year">1916</span>
-          <span class="caption">Принято решение о возможности приема в институт лиц женского пола</span>
-        </button>
-        <button class="date" popovertarget="popover1918">
-          <span class="year">1918</span>
-          <span class="caption">Переименование института в "Электротехнический институт имени В.И. Ульянова"</span>
-        </button>
-        <button class="date" popovertarget="popover1931">
-          <span class="year">1931</span>
-          <span class="caption">Создание кафедры "ПУС" (с 1956 - ВТ)</span>
-        </button>
-        <button class="date" popovertarget="popover1937">
-          <span class="year">1937</span>
-          <span class="caption">Создание звукового дефектоскопа учеными ЭТИ</span>
-        </button>
-        <button class="date" popovertarget="popover1941">
-          <span class="year">1941</span>
-          <span class="caption">Начало блокады Ленинграда</span>
-        </button>
-        <button class="date" popovertarget="popover1942">
-          <span class="year">1942</span>
-          <span class="caption">Эвакуация ЛЭТИ из оккупированного города</span>
-        </button>
-        <button class="date" popovertarget="popover1945">
-          <span class="year">1945</span>
-          <span class="caption">Возвращение ЭТИ в Ленинград</span>
-        </button>
-        <button class="date" popovertarget="popover1947">
-          <span class="year">1947</span>
-          <span class="caption">Открытие мемориальной доски А.С. Попову</span>
-        </button>
-        <button class="date" popovertarget="popover1952">
-          <span class="year">1952</span>
-          <span class="caption">Спуск на воду ледокола "Ленин"</span>
-        </button>
-        <button class="date" popovertarget="popover1962">
-          <span class="year">1962</span>
-	  <span class="caption">Создание первой в стране кафедры электронной медицинской аппаратуры</span>
-        </button>
-        <button class="date" popovertarget="popover1967">
-          <span class="year">1967</span>
-          <span class="caption">Награждение ВУЗа Орденом Ленина</span>
-        </button>
-        <button class="date" popovertarget="popover1986">
-          <span class="year">1986</span>
-          <span class="caption">Создание музея ЛЭТИ. Установка памятника погибшим в ходе Великой Отечественной</span>
-        </button>
-        <button class="date" popovertarget="popover1992">
-          <span class="year">1992</span>
-          <span class="caption">Переименование университета в СПбГЭТУ</span>
-        </button>
-        <button class="date" popovertarget="popover2000">
-          <span class="year">2000</span>
-          <span class="caption">Присуждение выпускнику ЛЭТИ Ж.И. Алферову Нобелевской</span>
-        </button>
-        <button class="date" popovertarget="popover2005">
-          <span class="year">2005</span>
-          <span class="caption">Открытие у входа музея-лаборатории А.С. Попова мемориальной доски IEEE Milestone</span>
-        </button>
-        <button class="date" popovertarget="popover2013">
-          <span class="year">2013</span>
-          <span class="caption">Попадание СПбГЭТУ в число вузов-победителей конкурса на гос. субсидии для продвижения в
-            международных рейтингах</span>
-        </button>
-        <button class="date" popovertarget="popover2014">
-          <span class="year">2014</span>
-          <span class="caption">Награжден Орденом Дружбы Республики Вьетнам за помощь в подготовке специалистов</span>
-        </button>
-      </div>
-    </div>
-    <div class="test-proposal">
-      <div class="bg">
-        <div class="eclipse2"></div>
-        <div class="rectangle-29"></div>
-        <div class="eclipse3"></div>
-        <div class="rectangle-30"></div>
-      </div>
-      <div class="proposal-content">
-        <h2>Проверь свои знания об истории университета в викторинах!</h2>
-        <div class="button">Перейти</div>
-      </div>
-    </div>
-  </main>
-  <footer>
-    <div class="col1">
-      <img src="/static/spbetu-logo-ru-svg2.svg" />
-      <div class="underlogo">
-        <h3>Проект команды</h3>
-        <div>“Катюха” FanClub</div>
-        <br>
-        <h3>В составе:</h3>
-        <div>
-          Сомов Андрей, 4395 <br>
-          Власов Иван, 4372 <br>
-          Алтухов Дмитрий, 4395 <br>
-          Харчинский Савелий, 4734
-        </div>
-      </div>
-    </div>
-    <div class="col2">
-      <h3>Пользователям</h3>
-      <div>
-        <div>Статьи</div>
-        <div>Таймлайн</div>
-        <div>Викторины и тесты</div>
-        <div>Авторам</div>
-      </div>
-    </div>
-    <div class="col3">
-      <a href="https://t.me/etustory"><img src="/static/frame-40.svg" /></a>
-      <div class="underlogo">
-        <div>Поддержать проект</div>
-        <div>Обратная связь</div>
-      </div>
-    </div>
-  </footer>
-</body>
+	    <div class="link">
+	      <img src="/static/image-60.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">История Музея</div>
+	      <div class="subtitle">
+		С 1986 по сегодняшний день
+	      </div>
+	      <div class="date">10.02.2025</div>
+	      <div onclick="openPage('/article/museum')" class="readbutton">Читать</div>
+	    </div>
 
+	    <div class="link">
+	      <img src="/static/image-22.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">Электротехнический</div>
+	      <div class="subtitle">
+		В период с 1917 по 1930
+	      </div>
+	      <div class="date">20.02.2025</div>
+	      <div onclick="openPage('/article/1917')" class="readbutton">Читать</div>
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <div class="timeline">
+	<h2> История университета на таймлайне</h2>
+	<img class="line" src="/static/union0.svg" />
+	<div class="popovers">
+	  <div id="popover1886" popover class="datecard">
+	    <h3>1886 год</h3>
+	    <img class="cardimg" src="/static/imagefill0.png" />
+	    <div class="cardcaption">
+	      15 (3) июня 1886: Император Александр III утвердил создание Технического
+	      училища Почтово-телеграфного ведомства, положив начало первому в России
+	      специализированному электротехническому учебному заведению. Это событие
+	      стало отправной точкой для развития электротехнического образования в
+	      стране.
+	    </div>
+	  </div>
+	  <div id="popover1891" popover class="datecard">
+	    <h3>1891 год</h3>
+	    <img class="cardimg" src="/static/imagefill1.png" />
+	    <div class="cardcaption">
+	      11 (23) июня 1891: Преобразование Технического училища в
+	      Электротехнический институт (ЭТИ), что повысило статус учебного
+	      заведения и расширило учебные программы. Институт стал центром
+	      подготовки инженеров-электриков высокого уровня.
+	    </div>
+	  </div>
+	  <div id="popover1893" popover class="datecard">
+	    <h3>1893 год</h3>
+	    <img class="cardimg" src="/static/imagefill2.png" />
+	    <div class="cardcaption">
+	      1893: Основание первой в России кафедры теоретических основ
+	      электротехники профессором И.И. Боргманом. Это заложило фундамент для
+	      развития теоретической базы электротехнического образования в стране.
+	    </div>
+	  </div>
+	  <div id="popover1897" popover class="datecard">
+	    <h3>1897 год</h3>
+	    <img class="cardimg" src="/static/imagefill3.png" />
+	    <div class="cardcaption">
+	      31 (19) октября 1897: Доклад А.С. Попова «О беспроволочной телеграфии».
+	      Это событие стало одним из первых публичных представлений изобретения
+	      радио и укрепило позиции ЭТИ как передового научного центра.
+	    </div>
+	  </div>
+	  <div id="popover1899" popover class="datecard">
+	    <h3>1899 год</h3>
+	    <img class="cardimg" src="/static/imagefill4.png" />
+	    <div class="cardcaption">
+              16 (4) июня 1899: Электротехнический институт императора Александра III
+              получил статус высшего учебного заведения с введением пятикурсного
+              обучения. Это позволило углубить учебную программу и повысить
+              квалификацию выпускников.
+	    </div>
+	  </div>
+	  <div id="popover1900" popover class="datecard">
+	    <h3>1900 год</h3>
+	    <img class="cardimg" src="/static/imagefill5.png" />
+	    <div class="cardcaption">
+	      16 (4) июня 1899: Электротехнический институт императора Александра III
+	      получил статус высшего учебного заведения с введением пятикурсного
+	      обучения. Это позволило углубить учебную программу и повысить
+	      квалификацию выпускников.
+	    </div>
+	  </div>
+	  <div id="popover1905" popover class="datecard">
+	    <h3>1905 год</h3>
+	    <img class="cardimg" src="/static/imagefill6.png" />
+	    <div class="cardcaption">
+	      7 октября (25 сентября) 1905: Совет ЭТИ избрал директором профессора
+	      А.С. Попова. Это событие стало признанием заслуг Попова и важным этапом
+	      в развитии института, возглавляемого выдающимся ученым.
+	    </div>
+	  </div>
+	  <div id="popover1916" popover class="datecard">
+	    <h3>1916 год</h3>
+	    <img class="cardimg" src="/static/imagefill7.png" />
+	    <div class="cardcaption">
+	      1916: Совет института принял решение допустить прием в институт лиц
+	      женского пола. Это стало важным шагом на пути к равноправию в
+	      образовании и расширению доступа к инженерным профессиям.
+	    </div>
+	  </div>
+	  <div id="popover1918" popover class="datecard">
+	    <h3>1918 год</h3>
+	    <img class="cardimg" src="/static/imagefill8.png" />
+	    <div class="cardcaption">
+	      1918: Электротехнический институт императора Александра III переименован
+	      в Электротехнический институт имени В.И. Ульянова (Ленина). Это событие
+	      отразило изменения в политической системе страны и идеологическую
+	      направленность образования.
+	    </div>
+	  </div>
+	  <div id="popover1931" popover class="datecard">
+	    <h3>1931 год</h3>
+	    <img class="cardimg" src="/static/imagefill9.png" />
+	    <div class="cardcaption">
+	      1931: Создана кафедра «Приборы управления стрельбой» (ПУС). Это событие
+	      положило начало подготовке специалистов в области вычислительной
+	      техники, что в будущем станет одним из ключевых направлений развития
+	      института
+	    </div>
+	  </div>
+	  <div id="popover1937" popover class="datecard">
+	    <h3>1937 год</h3>
+	    <img class="cardimg" src="/static/imagefill10.png" />
+	    <div class="cardcaption">
+	      1937: Образец звукового дефектоскопа, созданный в ЛЭТИ, был принят и
+	      запущен в промышленное производство. Это событие стало важным этапом в
+	      развитии ультразвуковой дефектоскопии и внедрении научных разработок
+	      института в промышленность.
+	    </div>
+	  </div>
+	  <div id="popover1941" popover class="datecard">
+	    <h3>1941 год</h3>
+	    <img class="cardimg" src="/static/imagefill11.png" />
+	    <div class="cardcaption">
+	      Началась блокада Ленинграда. Студенты и преподаватели ЛЭТИ ушли на
+	      фронт. Во время блокады институт продолжал работать, выпуская
+	      специалистов для нужд города и фронта.
+	    </div>
+	  </div>
+	  <div id="popover1942" popover class="datecard">
+	    <h3>1942 год</h3>
+	    <img class="cardimg" src="/static/imagefill12.png" />
+	    <div class="cardcaption">
+	      13 марта 1942: Эвакуация ЛЭТИ из блокадного Ленинграда. Это позволило
+	      сохранить научный и образовательный потенциал института в тяжелейших
+	      условиях войны.
+	    </div>
+	  </div>
+	  <div id="popover1945" popover class="datecard">
+	    <h3>1945 год</h3>
+	    <img class="cardimg" src="/static/imagefill13.png" />
+	    <div class="cardcaption">
+	      Март 1945: Возвращение ЛЭТИ из эвакуации в Ленинград. Начало
+	      восстановления учебной и лабораторной базы института послевоенные годы.
+	    </div>
+	  </div>
+	  <div id="popover1947" popover class="datecard">
+	    <h3>1947 год</h3>
+	    <img class="cardimg" src="/static/imagefill14.png" />
+	    <div class="cardcaption">
+	      1947: На фасаде первого корпуса была открыта мемориальная доска
+	      профессору, изобретателю радио, первому выборному директору института
+	      А.С. Попову. Это увековечило память о выдающемся ученом и его вкладе в
+	      развитие науки и техники.
+	    </div>
+	  </div>
+	  <div id="popover1952" popover class="datecard">
+	    <h3>1952 год</h3>
+	    <img class="cardimg" src="/static/imagefill15.png" />
+	    <div class="cardcaption">
+
+	      TODO
+
+              5 декабря 1957: Спущен на воду атомоход «Ленин», в создании которого
+              принимали участие ученые ЛЭТИ. Это событие стало важным этапом в
+              развитии атомной энергетики и продемонстрировало высокий уровень
+              научно-технической экспертизы института.
+	    </div>
+	  </div>
+	  <div id="popover1962" popover class="datecard">
+	    <h3>1962 год</h3>
+	    <img class="cardimg" src="/static/imagefill16.png" />
+	    <div class="cardcaption">
+              1962: Организована первая в стране кафедра электронной медицинской
+              аппаратуры. Началась подготовка специалистов в области биомедицинской
+              электроники, что стало новым направлением в развитии института.
+	    </div>
+	  </div>
+	  <div id="popover1967" popover class="datecard">
+	    <h3>1967 год</h3>
+	    <img class="cardimg" src="/static/imagefill17.png" />
+	    <div class="cardcaption">
+              7 января 1967: ЛЭТИ награжден орденом Ленина за заслуги в подготовке
+              инженерных кадров и развитии научных исследований. Это стало высшей
+              государственной наградой, признанием достижений института.
+	    </div>
+	  </div>
+	  <div id="popover1986" popover class="datecard">
+	    <h3>1986 год</h3>
+	    <img class="cardimg" src="/static/imagefill18.png" />
+	    <div class="cardcaption">
+              1986: На Инструментальной улице около здания пятого корпуса установлен
+              Памятник студентам и преподавателям ЛЭТИ, погибшим в годы войны. Это
+              дань памяти героям, отдавших свои жизни за Родину. В этом же году был
+              открыт музей истории ЛЭТИ
+	    </div>
+	  </div>
+	  <div id="popover1992" popover class="datecard">
+	    <h3>1992 год</h3>
+	    <img class="cardimg" src="/static/imagefill19.png" />
+	    <div class="cardcaption">
+              1992: ЛЭТИ получил статус технического университета и новое название –
+              «Санкт-Петербургский государственный электротехнический университет
+              имени В.И. Ульянова (Ленина)» (СПбГЭТУ). Это событие стало важным этапом
+              в развитии института, открыв новые возможности для расширения
+              образовательной и научной деятельности.
+	    </div>
+	  </div>
+	  <div id="popover2000" popover class="datecard">
+	    <h3>2000 год</h3>
+	    <img class="cardimg" src="/static/imagefill20.png" />
+	    <div class="cardcaption">
+              2000: Присуждение Нобелевской премии по физике выпускнику ЛЭТИ академику
+              Жоресу Ивановичу Алферову. Это событие стало признанием выдающихся
+              научных достижений выпускника ЛЭТИ и повысило престиж университета.
+	    </div>
+	  </div>
+	  <div id="popover2005" popover class="datecard">
+	    <h3>2005 год</h3>
+	    <img class="cardimg" src="/static/imagefill21.png" />
+	    <div class="cardcaption">
+              2005: Открытие у входа в мемориальный музей-лабораторию А.С. Попова
+              бронзовой мемориальной доски IEEE Milestone, посвященной 110-летию
+              изобретения радио А.С. Поповым. Это подтверждает международное признание
+              вклада А.С. Попова и ЛЭТИ в развитие электротехники.
+	    </div>
+	  </div>
+	  <div id="popover2013" popover class="datecard">
+	    <h3>2013 год</h3>
+	    <img class="cardimg" src="/static/imagefill22.png" />
+	    <div class="cardcaption">
+              Август 2013: СПбГЭТУ «ЛЭТИ» вошел в число вузов-победителей конкурса на
+              право получения государственных субсидий для повышения
+              конкурентоспособности и продвижения в международных рейтингах. Это стало
+              стимулом для развития института и повышения его конкурентоспособности на
+              международном уровне.
+	    </div>
+	  </div>
+	  <div id="popover2014" popover class="datecard">
+	    <h3>2014 год</h3>
+	    <img class="cardimg" src="/static/imagefill23.png" />
+	    <div class="cardcaption">
+              21 октября 2014: СПбГЭТУ «ЛЭТИ» награжден Орденом Дружбы
+              Социалистической Республики Вьетнам. Это признание многолетнего вклада
+              ЛЭТИ в подготовку кадров для Вьетнама и развитие сотрудничества между
+              странами.
+	    </div>
+	  </div>
+	</div>
+	  <script>
+	    const datecards = document.querySelectorAll("div.popovers > .datecard");
+	    datecards.forEach((datecard) => {
+		let nextCard = datecard.nextElementSibling;
+		let prevCard = datecard.previousElementSibling;
+		let header = datecard.querySelector("h3");
+		header.insertAdjacentHTML("afterbegin", `<img class="prev" src="/static/leftarrow.svg" />`);
+		header.insertAdjacentHTML("beforeend", `<img class="next" src="/static/rightarrow.svg" />`);
+		let prevButton = header.querySelector("img.prev");
+		let nextButton = header.querySelector("img.next");
+		if (prevCard !== null) {
+		    prevButton.addEventListener("click", () => {
+			datecard.hidePopover();
+			prevCard.showPopover();
+		    });
+		} else {prevButton.classList.add("disabled")}
+		if (nextCard !== null) {
+		    nextButton.addEventListener("click", () => {
+			datecard.hidePopover();
+			nextCard.showPopover();
+		    });
+		} else {nextButton.classList.add("disabled") }
+	    });
+	  </script>
+	<div class="dates">
+	  <button class="date" popovertarget="popover1886">
+	    <span class="year">1886</span>
+	    <span class="caption">Утверждение создания Почтово-Телеграфного ведомства</span>
+	  </button>
+	  <button class="date" popovertarget="popover1891">
+	    <span class="year">1891</span>
+	    <span class="caption">Присвоение статуса Электротехнического института</span>
+	  </button>
+	  <button class="date" popovertarget="popover1893">
+	    <span class="year">1893</span>
+	    <span class="caption">Основание кафедры основ Электротехники</span>
+	  </button>
+	  <button class="date" popovertarget="popover1897">
+	    <span class="year">1897</span>
+	    <span class="caption">Доклад Попова "О беспроволочной телеграфии"</span>
+	  </button>
+	  <button class="date" popovertarget="popover1899">
+	    <span class="year">1899</span>
+	    <span class="caption">Получение статуса Высшего учебного заведения</span>
+	  </button>
+	  <button class="date" popovertarget="popover1900">
+	    <span class="year">1900</span>
+	    <span class="caption">Присвоение выпускникам звания "инженер-электрик"</span>
+	  </button>
+	  <button class="date" popovertarget="popover1905">
+	    <span class="year">1905</span>
+	    <span class="caption">Избрание Попова директором ЭТИ</span>
+	  </button>
+	  <button class="date" popovertarget="popover1916">
+	    <span class="year">1916</span>
+	    <span class="caption">Принято решение о возможности приема в институт лиц женского пола</span>
+	  </button>
+	  <button class="date" popovertarget="popover1918">
+	    <span class="year">1918</span>
+	    <span class="caption">Переименование института в "Электротехнический институт имени В.И. Ульянова"</span>
+	  </button>
+	  <button class="date" popovertarget="popover1931">
+	    <span class="year">1931</span>
+	    <span class="caption">Создание кафедры "ПУС" (с 1956 - ВТ)</span>
+	  </button>
+	  <button class="date" popovertarget="popover1937">
+	    <span class="year">1937</span>
+	    <span class="caption">Создание звукового дефектоскопа учеными ЭТИ</span>
+	  </button>
+	  <button class="date" popovertarget="popover1941">
+	    <span class="year">1941</span>
+	    <span class="caption">Начало блокады Ленинграда</span>
+	  </button>
+	  <button class="date" popovertarget="popover1942">
+	    <span class="year">1942</span>
+	    <span class="caption">Эвакуация ЛЭТИ из оккупированного города</span>
+	  </button>
+	  <button class="date" popovertarget="popover1945">
+	    <span class="year">1945</span>
+	    <span class="caption">Возвращение ЭТИ в Ленинград</span>
+	  </button>
+	  <button class="date" popovertarget="popover1947">
+	    <span class="year">1947</span>
+	    <span class="caption">Открытие мемориальной доски А.С. Попову</span>
+	  </button>
+	  <button class="date" popovertarget="popover1952">
+	    <span class="year">1952</span>
+	    <span class="caption">Спуск на воду ледокола "Ленин"</span>
+	  </button>
+	  <button class="date" popovertarget="popover1962">
+	    <span class="year">1962</span>
+	    <span class="caption">Создание первой в стране кафедры электронной медицинской аппаратуры</span>
+	  </button>
+	  <button class="date" popovertarget="popover1967">
+	    <span class="year">1967</span>
+	    <span class="caption">Награждение ВУЗа Орденом Ленина</span>
+	  </button>
+	  <button class="date" popovertarget="popover1986">
+	    <span class="year">1986</span>
+	    <span class="caption">Создание музея ЛЭТИ. Установка памятника погибшим в ходе Великой Отечественной</span>
+	  </button>
+	  <button class="date" popovertarget="popover1992">
+	    <span class="year">1992</span>
+	    <span class="caption">Переименование университета в СПбГЭТУ</span>
+	  </button>
+	  <button class="date" popovertarget="popover2000">
+	    <span class="year">2000</span>
+	    <span class="caption">Присуждение выпускнику ЛЭТИ Ж.И. Алферову Нобелевской</span>
+	  </button>
+	  <button class="date" popovertarget="popover2005">
+	    <span class="year">2005</span>
+	    <span class="caption">Открытие у входа музея-лаборатории А.С. Попова мемориальной доски IEEE Milestone</span>
+	  </button>
+	  <button class="date" popovertarget="popover2013">
+	    <span class="year">2013</span>
+	    <span class="caption">Попадание СПбГЭТУ в число вузов-победителей конкурса на гос. субсидии для продвижения в международных рейтингах</span>
+	  </button>
+	  <button class="date" popovertarget="popover2014">
+	    <span class="year">2014</span>
+	    <span class="caption">Награжден Орденом Дружбы Республики Вьетнам за помощь в подготовке специалистов</span>
+	  </button>
+	</div>
+      </div>
+      <div class="test-proposal">
+	<div class="bg">
+	  <div class="eclipse2"></div>
+	  <div class="rectangle-29"></div>
+	  <div class="eclipse3"></div>
+	  <div class="rectangle-30"></div>
+	</div>
+	<div class="proposal-content">
+	  <h2>Проверь свои знания об истории университета в викторинах!</h2>
+	  <div class="button" onclick="openPage('/quiz')">Перейти</div>
+	</div>
+      </div>
+    </main>
+    <footer>
+      <div class="col1">
+	<img src="/static/spbetu-logo-ru-svg2.svg" />
+	<div class="underlogo">
+	  <h3>Проект команды</h3>
+	  <div>“Катюха” FanClub</div>
+	  <br>
+	  <h3>В составе:</h3>
+	  <div>
+	    Сомов Андрей, 4395 <br>
+	    Власов Иван, 4372 <br>
+	    Алтухов Дмитрий, 4395 <br>
+	    Харчинский Савелий, 4734
+	  </div>
+	</div>
+      </div>
+      <div class="col2">
+	<h3>Пользователям</h3>
+	<div>
+	  <div>Статьи</div>
+	  <div>Таймлайн</div>
+	  <div>Викторины и тесты</div>
+	  <div>Авторам</div>
+	</div>
+      </div>
+      <div class="col3">
+	<a href="https://t.me/etustory"><img src="/static/frame-40.svg" /></a>
+	<div class="underlogo">
+	  <div>Поддержать проект</div>
+	  <div>Обратная связь</div>
+	</div>
+      </div>
+    </footer>
+  </body>
 </html>

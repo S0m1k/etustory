@@ -1,0 +1,18 @@
+{% extends 'sample.html' %}
+
+{% block main %}
+    <form method="POST">
+    <fieldset>
+        <legend>{{ question['question_text'] }}</legend>
+        <img src=" {{ question['src'] }}">
+        <a> Question {{ question['id'] }} / 9 </a>
+        {% for option in question['options'] %}
+        <label>
+            <input type="{{ question['type'] }}" name="{{ question['correct_answer'] }}" value="{{ option }}">
+            {{ option }}
+        </label><br>
+        {% endfor %}
+        <button type="submit" >Answer</button>
+    </fieldset>
+    </form>
+{% endblock %}

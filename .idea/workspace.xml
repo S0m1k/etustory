@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="new quiz 2">
-      <change beforePath="$PROJECT_DIR$/templates/quiz.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/quiz.html" afterDir="false" />
+    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="update scrolls + static involve 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,12 +13,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2vX1m46Sx05k5LlDX7aJ7cZ1XoN" />
@@ -30,6 +36,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\PycharmProjects\etustory\templates" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="etustory" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -89,7 +102,42 @@
       <option name="project" value="LOCAL" />
       <updated>1744398003519</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new quiz 3">
+      <created>1744398188681</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744398188681</updated>
+    </task>
+    <task id="LOCAL-00005" summary="full quiz update">
+      <created>1744505232089</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744505232089</updated>
+    </task>
+    <task id="LOCAL-00006" summary="cosmetic update">
+      <created>1744510848809</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744510848810</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update scrolls + static involve">
+      <created>1744578758551</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744578758551</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update scrolls + static involve 2">
+      <created>1744578782993</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744578782993</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,6 +156,11 @@
     <MESSAGE value="cvv" />
     <MESSAGE value="new quiz" />
     <MESSAGE value="new quiz 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="new quiz 2" />
+    <MESSAGE value="new quiz 3" />
+    <MESSAGE value="full quiz update" />
+    <MESSAGE value="cosmetic update" />
+    <MESSAGE value="update scrolls + static involve" />
+    <MESSAGE value="update scrolls + static involve 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="update scrolls + static involve 2" />
   </component>
 </project>

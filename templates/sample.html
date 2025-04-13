@@ -12,14 +12,13 @@
   <body>
     <header>
       <div class="header-top">
-	<img src="/static/spbetu-logo-ru-svg1.svg" onclick="openPage('/home')"/>
+	<img src="/static/spbetu-logo-ru-svg1.svg" onclick="openPage('/home')" />
 	<div class="title">139 Лет первого электротехнического на одной платформе</div>
       </div>
       <div class="header-bottom">
-	<div onclick="openPage('/articles')">Статьи</div>
-	<div>Таймлайн</div>
+	<div onclick="openPage('/home')">Статьи</div>
+	<div onclick="openPage('/home')">Таймлайн</div>
 	<div onclick="openPage('/authors')">Авторам</div>
-	<div>Жизнь музея</div>
 	<div onclick="openPage('/quiz')">Тесты и викторины</div>
 	<script>
 		function openPage(page) {
@@ -28,36 +27,8 @@
 	</script>
       </div>
     </header>
-    <main>
-      <div id="article-header" class="splash article-splash">
-	<span id="article-header-text" class="splash-content">Загрузка...</span>
-	<img id="article-header-bg" class="bg"/>
-      </div>
-      <div id="article-content">
-	Загрузка...
-      </div>
-    <script>
-      const headerElem = document.getElementById("article-header-text");
-      const headerBgElem = document.getElementById("article-header-bg");
-      const articleContentElem = document.getElementById("article-content");
-      const articles = new Map();
-      articles.set("popov", {
-	  header: `<style>#article-header-text { font-size: 96px;}</style> А.С. Попов - <br>отец российской радиотехники`,
-	  headerBg: "/static/image-170.png",
-	  content: "{{ uploaded_text }}"
-      });
-      const params = new URLSearchParams(window.location.search);
-      if (articles.has(params.get("slug"))) {
-	  const article = articles.get(params.get("slug"));
-	  headerElem.innerHTML = article.header;
-	  headerBgElem.setAttribute("src", article.headerBg);
-	  articleContentElem.innerHTML = article.content;
-      } else {
-	  headerElem.textContent = "Ошибка! Статья не найдена.";
-	  articleContentElem.textContent = "";
-      }
-    </script>
-    </main>
+	{% block main %}
+	{% endblock %}
     <footer>
       <div class="col1">
 	<img src="/static/spbetu-logo-ru-svg2.svg" />
