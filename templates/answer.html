@@ -2,7 +2,9 @@
 
 {% block main %}
 <div>
-  <img src=" {{ image }}">
+  <labeel>Вопрос: {{ new_id }} / 9</labeel>
+  <img src="{{ image1 }}">
+  <img src="{{ image2 }}">
   <label> {{ text }}</label>
   <a href="{{ url_for('question', id = new_id) }}">Следующий вопрос</a>
 </div>
