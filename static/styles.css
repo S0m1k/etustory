@@ -67,6 +67,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	aspect-ratio: 16/9;
+	justify-content: center;
 	.splash-content {
 	    display: flex;
 	    flex-direction: column;
@@ -116,10 +117,15 @@ main {
 		    }
 		}
 		.subheader {
+		    background: none;
+		    border: none;
+		    color: #ffffff;
 		    font-size: 18px;
 		    font-weight: 400;
 		}
 		.button {
+		    background: none;
+		    color: #ffffff;
 		    border-radius: 20px;
 		    border-style: solid;
 		    border-color: #ffffff;
@@ -135,6 +141,33 @@ main {
 		    font-size: 14px;
 		    font-weight: 400;
 		    text-transform: uppercase;
+		}
+		&.test-card {
+		    background: #ffffff;
+		    color: #000000;
+		    padding: 1em;
+		    max-height: 70%;
+		    max-width: 40%;
+		    border-radius: 2em;
+		    text-align: center;
+		    font-size: 32px;
+		    overflow-y: scroll;
+		    button {
+			font-family: "Inter", sans-serif;
+			font-size: 14px;
+			border: #000000;
+			border-style: solid;
+			border-radius: 1em;
+			background: none;
+			width: 50%;
+			text-align: left;
+			padding: 0.5em;
+			border-width: 2px;
+			margin: 1em;
+		    }
+		    .secret {
+			filter: blur(20px);
+		    }
 		}
 	    }
 	}

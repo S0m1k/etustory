@@ -1,11 +1,14 @@
 {% extends 'sample.html' %}
 
 {% block main %}
-<div>
-  <labeel>Вопрос: {{ new_id }} / 9</labeel>
-  <img src="{{ image1 }}">
-  <img src="{{ image2 }}">
-  <label> {{ text }}</label>
-  <a href="{{ url_for('question', id = new_id) }}">Следующий вопрос</a>
+<div id="article-header" class="splash test-splash question-splash">
+  <div class="splash-content test-card">
+    <label>Вопрос: {{ new_id }} / 9</label>
+    <img src="{{ image1 }}">
+    <img src="{{ image2 }}">
+    <label> {{ text }}</label>
+    <a href="{{ url_for('question', id = new_id) }}">Следующий вопрос</a>
+  </div>
+  <img id="article-header-bg" class="bg" src="/static/image-110.png" />
 </div>
 {% endblock %}

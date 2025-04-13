@@ -1,18 +1,15 @@
 {% extends 'sample.html' %}
 
 {% block main %}
-    <form method="POST">
-    <fieldset>
-        <legend>{{ question['question_text'] }}</legend>
-        <img src=" {{ question['src'] }}">
-        <a> Question {{ question['id'] }} / 9 </a>
-        {% for option in question['options'] %}
-        <label>
-            <input type="{{ question['type'] }}" name="{{ question['correct_answer'] }}" value="{{ option }}">
-            {{ option }}
-        </label><br>
-        {% endfor %}
-        <button type="submit" >Answer</button>
-    </fieldset>
-    </form>
+<div id="article-header" class="splash test-splash question-splash">
+  <form class="splash-content test-card" method="POST">
+    <a> Question {{ question['id'] }} / 9 </a>
+    <legend>{{ question['question_text'] }}</legend>
+    <img class="secret" src=" {{ question['src'] }}">
+    {% for option in question['options'] %}
+    <button type="submit" name="{{ question['correct_answer'] }}" value="{{option}}">{{option}}</button>
+    {% endfor %}
+  </form>
+  <img id="article-header-bg" class="bg" src="/static/image-110.png" />
+</div>
 {% endblock %}

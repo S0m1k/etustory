@@ -1,8 +1,14 @@
 {% extends 'sample.html' %}
 
 {% block main %}
-    <form method="POST" action="{{ url_for('quiz') }}">
-        <input type="text" name="username">
-        <button type="submit">Начать квиз</button>
+<div id="article-header" class="splash test-splash">
+    <form class="splash-content" method="POST" action="{{ url_for('quiz') }}">
+	<div class="header">
+	Тест 139 лет ЛЭТИ
+	</div>
+      <input required class="subheader" type="text" name="username" placeholder="Введите имя пользователя" />
+      <button class="button" type="submit">Начать квиз</button>
     </form>
+  <img id="article-header-bg" class="bg" src="/static/image-110.png" />
+</div>
 {% endblock %}
