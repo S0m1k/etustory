@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="full quiz update">
+    <list default="true" id="4ae4836f-f103-4436-aff8-6799cafb3b63" name="Default Changelist" comment="cosmetic update">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/article/1917.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/article/fkti.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/article/museum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/article/popov.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/article/vov.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/answer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/answer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/answer_toresult.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/answer_toresult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/frame-40.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/frame-40.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/leftarrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/leftarrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/rightarrow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/rightarrow.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/score.db" beforeDir="false" afterPath="$PROJECT_DIR$/static/score.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/spbetu-logo-ru-svg1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/spbetu-logo-ru-svg1.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/spbetu-logo-ru-svg2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/spbetu-logo-ru-svg2.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/union0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/union0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/article.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/authors.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/authors.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sample.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sample.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +55,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\PycharmProjects\etustory\templates" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="etustory" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -112,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1744505232089</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="cosmetic update">
+      <created>1744510848809</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744510848810</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,6 +163,7 @@
     <MESSAGE value="new quiz 2" />
     <MESSAGE value="new quiz 3" />
     <MESSAGE value="full quiz update" />
-    <option name="LAST_COMMIT_MESSAGE" value="full quiz update" />
+    <MESSAGE value="cosmetic update" />
+    <option name="LAST_COMMIT_MESSAGE" value="cosmetic update" />
   </component>
 </project>

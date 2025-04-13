@@ -16,15 +16,35 @@
 	<div class="title">139 Лет первого электротехнического на одной платформе</div>
       </div>
       <div class="header-bottom">
-	<div onclick="openPage('/articles')">Статьи</div>
-	<div>Таймлайн</div>
+	<div onclick="smoothScroll(document.getElementsByClassName('linklist')[0])" >Статьи</div>
+	<div onclick="smoothScroll(document.getElementsByClassName('timeline')[0])" >Таймлайн</div>
 	<div onclick="openPage('/authors')">Авторам</div>
-	<div>Жизнь музея</div>
 	<div onclick="openPage('/quiz')">Тесты и викторины</div>
 	<script>
 		function openPage(page) {
   			window.location.href=page
 		}
+		window.smoothScroll = function(target) {
+		var scrollContainer = target;
+		do { //find scroll container
+			scrollContainer = scrollContainer.parentNode;
+			if (!scrollContainer) return;
+			scrollContainer.scrollTop += 1;
+		} while (scrollContainer.scrollTop == 0);
+
+		var targetY = 0;
+		do { //find the top of target relatively to the container
+			if (target == scrollContainer) break;
+			targetY += target.offsetTop;
+		} while (target = target.offsetParent);
+
+		scroll = function(c, a, b, i) {
+			i++; if (i > 30) return;
+			c.scrollTop = a + (b - a) / 30 * i;
+			setTimeout(function(){ scroll(c, a, b, i); }, 20);
+		}
+		scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+	}
 	</script>
       </div>
     </header>
@@ -54,7 +74,7 @@
 		От Электрификации судов до информационной безопасности
 	      </div>
 	      <div class="date">20.02.2025</div>
-	      <div class="readbutton">Читать</div>
+	      <div onclick="openPage('/article/fkti')" class="readbutton">Читать</div>
 	    </div>
 
 	    <div class="link">
@@ -65,7 +85,7 @@
 		Отец Российской радиотехники
 	      </div>
 	      <div class="date">20.02.2025</div>
-	      <div class="readbutton">Читать</div>
+	      <div onclick="openPage('/article/popov')" class="readbutton">Читать</div>
 	    </div>
 
 	    <div class="link">
@@ -76,7 +96,7 @@
 		в годы Великой Отечественной Войны
 	      </div>
 	      <div class="date">14.02.2025</div>
-	      <div class="readbutton">Читать</div>
+	      <div onclick="openPage('/article/vov')" class="readbutton">Читать</div>
 	    </div>
 
 	    <div class="link">
@@ -87,7 +107,18 @@
 		С 1986 по сегодняшний день
 	      </div>
 	      <div class="date">10.02.2025</div>
-	      <div class="readbutton">Читать</div>
+	      <div onclick="openPage('/article/museum')" class="readbutton">Читать</div>
+	    </div>
+
+	    <div class="link">
+	      <img src="/static/image-22.png" />
+	      <div class="type">Статья</div>
+	      <div class="title">Электротехнический</div>
+	      <div class="subtitle">
+		В период с 1917 по 1930
+	      </div>
+	      <div class="date">20.02.2025</div>
+	      <div onclick="openPage('/article/1917')" class="readbutton">Читать</div>
 	    </div>
 	  </div>
 	</div>

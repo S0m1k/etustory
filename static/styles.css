@@ -94,7 +94,7 @@ main {
 	    .article-splash & {
 		text-align: center;
 		color: #ffffff;
-		font-weight: 700;
+		font-weight: 600;
 		font-family: "Inter", sans-serif;
 		font-style: italic;
 		font-size: 60px;
@@ -147,6 +147,7 @@ main {
 		opacity: 0.7;
 	    }
 	    .article-splash & {
+		filter: brightness(0.5);
 		object-fit: cover;
 		object-position: 0 15%;
 	    } /* возможно надо отдельно для каждой страницы подбирать object-position, тогда в ответе от сервера должен быть еще и отдельный css на расположение фона заголовка, хз */
@@ -493,6 +494,29 @@ main {
 	    .svg-button {
 		filter: invert(100%);
 	    }
+	}
+    }
+    #article-content {
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 400;
+	font-family: "Inter", sans-serif;
+	img {
+	    display: block;
+	    align-self: center;
+	    max-width: 70%;
+	    & + p {
+		color: #999999;
+		font-size: 13px;
+		align-self: center;
+	    }
+	}
+	.row {
+	    display: flex;
+	    justify-content: center;
 	}
     }
 }

@@ -123,12 +123,16 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/articles')
-def articles():
-    return render_template("article.html")
+@app.route('/article/<string:slug>')
+def article(slug):
+     return render_template(f"article/{slug}.html")
 
 @app.route('/authors')
 def authors():
+    return render_template("authors.html")
+
+@app.route('/authors', methods=['POST'])
+def upload_file():
     return render_template("authors.html")
 
 @app.route('/quiz')
@@ -150,7 +154,7 @@ def results():
                            score_ratings=all_scores)
 
 
-@app.route('/quiz/<int:id>', methods=['POST', 'GET'])
+@app.route('/quiz/<int:id>', methods=['GET', 'POST'])
 def question_processing(id):
     ans = quiz_data['questions'][id]
     try:
