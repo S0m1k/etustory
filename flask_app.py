@@ -9,6 +9,8 @@ path = os.path.dirname(os.path.realpath(__file__))
 score_db = Score_DB(path+"/static/score.db")
 app.secret_key = 'BAD_SECRET_KEY'
 UPLOAD_FOLDER = 'static/upload'
+ALLOWED_EXTENSIONS = {'txt', 'docx', 'pdf'}
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 image_lst = ['/static/check-ring-duotone0.svg', '/static/close-round-duotone0.svg'] # для доп картинок
@@ -134,11 +136,17 @@ def article(slug):
 def authors():
     return render_template("authors.html")
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/authors', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        if file:
+        print(allowed_file(file.filename))
+        if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('home'))
