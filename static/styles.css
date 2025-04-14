@@ -22,8 +22,7 @@ body {
 header {
     .header-top {
 	display: flex;
-	padding: 1em 3em;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	img {
 	    max-width: 100%;
@@ -36,6 +35,7 @@ header {
 	    letter-spacing: -0.01em;
 	    text-transform: uppercase;
 	    color: #05336E;
+		padding-left: 1em;
 	    @media (max-width: 850px) {
 		display: none;
 	    }
