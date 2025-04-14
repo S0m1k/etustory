@@ -1,0 +1,14 @@
+{% extends 'sample.html' %}
+
+{% block main %}
+<div id="article-header" class="splash test-splash question-splash">
+  <div class="splash-content test-card" method="POST">
+    <ol>
+	{% for score_rating in score_ratings %}
+		<li> Участник: {{ score_rating[0] }} Счет: {{ score_rating[1] }} </li>
+	{% endfor %}
+    </ol>
+  </div>
+  <img id="article-header-bg" class="bg" src="/static/image-110.png" />
+</div>
+{% endblock %}

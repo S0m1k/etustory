@@ -1,12 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 from random import sample
 from db import Score_DB
+from werkzeug.utils import secure_filename
 import os
 
 
 app = Flask(__name__)
 score_db = Score_DB('C:\\Users\\Admin\\PycharmProjects\\etustory\\static\\score.db')
 app.secret_key = 'BAD_SECRET_KEY'
+UPLOAD_FOLDER = 'static/upload'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 image_lst = ['/static/check-ring-duotone0.svg', '/static/close-round-duotone0.svg'] # для доп картинок
 
@@ -119,7 +122,7 @@ quiz_data = {
 
 @app.route('/')
 @app.route('/home')
-def index():
+def home():
     return render_template("index.html")
 
 
@@ -133,7 +136,13 @@ def authors():
 
 @app.route('/authors', methods=['POST'])
 def upload_file():
-    return render_template("authors.html")
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('home'))
+    return redirect(url_for('authors'))
 
 @app.route('/quiz')
 def quiz():
@@ -143,15 +152,19 @@ def quiz():
 def question(id):
     ans = quiz_data['questions'][id]
     ans['options'] = sample(ans['options'], k=len(ans['options']))
-    return render_template('question.html', question=ans)
+    return render_template('question.html', id=ans['id'], src=ans['src'],
+                           question_text=ans['question_text'], options=ans['options'])
 
 @app.route('/quiz/results')
 def results():
     score_db.new_score(session['username'], session['score'])
+    return render_template('result.html', score=session['score'],
+                           total_questions=len(quiz_data['questions']))
+
+@app.route('/quiz/allresults')
+def allresults():
     all_scores = score_db.get_scores()[::-1]
-    return render_template('result.html', title='Quiz Result', score=session['score'],
-                           total_questions=len(quiz_data['questions']),
-                           score_ratings=all_scores)
+    return render_template('allresults.html', score_ratings = all_scores)
 
 
 @app.route('/quiz/<int:id>', methods=['GET', 'POST'])
@@ -164,10 +177,10 @@ def question_processing(id):
             if id != 9:
                 return render_template('answer.html', image1=ans['src'], image2=image_lst[0],
                                        new_id=ans['id'] + 1, text=ans['cor_message'])
-            return render_template('answer_toresult.html', image1=ans['src'], image2=image_lst[1],
+            return render_template('answer_toresult.html', image1=ans['src'], image2=image_lst[0],
                                    text=ans['cor_message'])
         if id != 9:
-            return render_template('answer.html', image1=ans['src'], image2=image_lst[0], new_id=ans['id'] + 1, text=ans['wrong_message'])
+            return render_template('answer.html', image1=ans['src'], image2=image_lst[1], new_id=ans['id'] + 1, text=ans['wrong_message'])
         return render_template('answer_toresult.html', image1=ans['src'], image2=image_lst[1], text=ans['wrong_message'])
     except Exception:
         return redirect( url_for('question', id=id))
