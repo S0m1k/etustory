@@ -4,9 +4,9 @@ from db import Score_DB
 from werkzeug.utils import secure_filename
 import os
 
-
 app = Flask(__name__)
-score_db = Score_DB('C:\\Users\\Admin\\PycharmProjects\\etustory\\static\\score.db')
+path = os.path.dirname(os.path.realpath(__file__))
+score_db = Score_DB(path+"/static/score.db")
 app.secret_key = 'BAD_SECRET_KEY'
 UPLOAD_FOLDER = 'static/upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
