@@ -5,8 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-path = os.path.dirname(os.path.realpath(__file__))
-score_db = Score_DB(path+"/static/score.db")
+score_db = Score_DB("/data/score.db")
 app.secret_key = 'BAD_SECRET_KEY'
 UPLOAD_FOLDER = 'static/upload'
 ALLOWED_EXTENSIONS = {'txt', 'docx', 'pdf'}
